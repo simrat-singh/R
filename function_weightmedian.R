@@ -1,3 +1,9 @@
+#functions
+#This function takes ditrectory name and day and calculate the median
+# weight for the given day
+#Uncomment printcommands to debug id needed
+
+
 weightmedian<-function(directory, day){
   
   file_list<-list.files(directory, full.names = TRUE)
