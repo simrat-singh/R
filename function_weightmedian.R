@@ -1,5 +1,5 @@
 #functions
-#This function takes ditrectory name and day and calculate the median
+#This function takes directory name and day and calculate the median
 # weight for the given day
 #Uncomment printcommands to debug id needed
 
