@@ -1,3 +1,13 @@
+#The function takes the directory, pollutant and target files as arguements
+# and returns the mean pollutant in the target files
+
+#'directory' is a charcter vectorindicating the location of source csv files
+#'pollutant' is a charcter vector indictating the name of the pollutant for
+#which mean is calculated. Considering the data available it will be either
+#'sulfate' or 'nitrate'
+
+#Return value is the mean
+
 pollutantmean<-function(directory, pollutant, id){
 
   print("Function 'pollutantmean' started")
@@ -6,8 +16,6 @@ pollutantmean<-function(directory, pollutant, id){
   for(i in id){
     data_set<-rbind(data_set, read.csv(files_list[i]))
   }
-  print(nrow(data_set))
-  head(data_set)
-  sulfate_dataset<-data_set[, "nitrate"]
-  mean(sulfate_dataset, na.rm = TRUE)
+  pollutant_dataset<-data_set[, grep(pollutant, colnames(data_set))]
+  mean(pollutant_dataset, na.rm = TRUE)
 }
