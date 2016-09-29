@@ -16,6 +16,7 @@ pollutantmean<-function(directory, pollutant, id){
   for(i in id){
     data_set<-rbind(data_set, read.csv(files_list[i]))
   }
-  pollutant_dataset<-data_set[, grep(pollutant, colnames(data_set))]
+  #pollutant_dataset<-data_set[, grep(pollutant, colnames(data_set))]
+  pollutant_dataset<-data_set[, which(colnames(data_set)==pollutant)]
   mean(pollutant_dataset, na.rm = TRUE)
 }
