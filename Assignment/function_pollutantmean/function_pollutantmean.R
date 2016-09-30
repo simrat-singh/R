@@ -8,7 +8,7 @@
 
 #Return value is the mean
 
-pollutantmean<-function(directory, pollutant, id){
+pollutantmean<-function(directory, pollutant, id=1:332){
 
   print("Function 'pollutantmean' started")
   files_list<-list.files(directory, full.names = TRUE)
