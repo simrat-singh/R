@@ -5,7 +5,7 @@
 # having file IDs and number of completecases respective to each file.
 #THen create a data_set using these two vectors
 
-complete<-function(directory, id){
+complete<-function(directory, id=1:332){
 
  files_list<- list.files(directory, full.names = TRUE)
  vec_id<-character(length = 0)   #created an empty character vector 
