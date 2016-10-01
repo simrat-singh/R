@@ -1,9 +1,10 @@
 #function returns a data frame where the first column is the name of
 #the file and second column is number of completely observed cases
-#LOGIC APPLIED: Extract rows with no NAs using "completecases", then count
-#number of rows, which will give number complete cases.Then create two datasets
-# having file IDs and number of completecases respective to each file.
-#THen create a data_set using these two vectors
+#LOGIC APPLIED: 
+#STEP1:Extract rows with no NAs using "completecases"
+#STEP2: Then count number of rows, which will give number complete cases.
+#STEP3:Then create two datasets having file IDs and number of completecases respective to each file.
+#STEP4:Then create a data_set using these two vectors and create a dataset from them
 
 complete<-function(directory, id=1:332){
 
