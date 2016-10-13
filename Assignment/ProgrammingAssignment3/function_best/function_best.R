@@ -1,6 +1,7 @@
 best<-function(state, outcome){
   
   dataset<-read.csv("C:/DS/R/Assignment/ProgrammingAssignment3/function_best/outcome-of-care-measures.csv")
+  #hosp_outcome<-head(dataset[,c(2,7,11,17,23)],10)
   hosp_outcome<-dataset[,c(2,7,11,17,23)]
   
   #changing names of columns to short and precise
@@ -8,10 +9,10 @@ best<-function(state, outcome){
   names(hosp_outcome)[2]<-"state"
   names(hosp_outcome)[3]<-"heart_attack"
   names(hosp_outcome)[4]<-"heart_failure"
-  names(hosp_outcome)[5]<-"Pneumonia"
+  names(hosp_outcome)[5]<-"pneumonia"
   
   state_list<-unique(hosp_outcome[,2], incomparables = FALSE) #Getting list of states
-  outcome_list<-c("heart attack", "heart failure", "Pneumonia") #Create a list of possible outcomes
+  outcome_list<-c("heart attack", "heart failure", "pneumonia") #Create a list of possible outcomes
   temp<-matrix() # A temporary matrix to store intermediate results
   options(warn = -1) #Supress warnings
   
@@ -20,7 +21,6 @@ best<-function(state, outcome){
   }
   
   if(!outcome %in% outcome_list){
-    print("checking outcome")
     stop("Invalid outcome")
   }
   
@@ -29,8 +29,45 @@ best<-function(state, outcome){
     bestHospital<-findBestHosp(hosp_outcome_heartattack, state)
   }
   
+  if(outcome=='heart failure'){
+    
+    hosp_outcome_heartfailure<-heartFailure(hosp_outcome)
+    bestHospital<-findBestHosp(hosp_outcome_heartfailure, state)
+  }
+  
+  if(outcome=='pneumonia'){
+    
+    hosp_outcome_pneumonia<-pneumonia(hosp_outcome)
+    bestHospital<-findBestHosp(hosp_outcome_pneumonia, state)
+  }
 }
 
+
+pneumonia<-function(hosp_outcome){
+  
+  #Getting subset of hospitnal name, state and heat_attack columns
+  hosp_outcome_pneumonia<-hosp_outcome[,c("hospital_name", "state","pneumonia")]
+  
+  #Converting factor to numeric in columns
+  hosp_outcome_pneumonia$pneumonia<-as.numeric(as.character(hosp_outcome_pneumonia$pneumonia))
+  
+  #Creating a temporary subset exclusing NAs
+  hosp_outcome_pneumonia_noNAs<-subset(hosp_outcome_pneumonia, !is.na(hosp_outcome_pneumonia$pneumonia))
+  hosp_outcome_pneumonia_noNAs
+}
+
+heartFailure<-function(hosp_outcome){
+  
+  #Getting subset of hospitnal name, state and heat_attack columns
+  hosp_outcome_heartfailure<-hosp_outcome[,c("hospital_name", "state","heart_failure")]
+  
+  #Converting factor to numeric in columns
+  hosp_outcome_heartfailure$heart_failure<-as.numeric(as.character(hosp_outcome_heartfailure$heart_failure))
+  
+  #Creating a temporary subset exclusing NAs
+  hosp_outcome_heartfailure_noNAs<-subset(hosp_outcome_heartfailure, !is.na(hosp_outcome_heartfailure$heart_failure))
+  hosp_outcome_heartfailure_noNAs
+}
 
 heartAttack<-function(hosp_outcome){
   #Getting subset of hospitnal name, state and heat_attack columns
@@ -43,6 +80,7 @@ heartAttack<-function(hosp_outcome){
   hosp_outcome_heartattack_noNAs<-subset(hosp_outcome_heartattack, !is.na(hosp_outcome_heartattack$heart_attack))
   hosp_outcome_heartattack_noNAs
 }
+
 
 findBestHosp<-function(hosp_shorlisted, state){
   
