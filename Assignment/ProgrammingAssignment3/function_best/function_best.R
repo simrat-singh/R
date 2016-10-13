@@ -1,3 +1,16 @@
+#Finding the hospital with lowest mortality rate for Heart Attack, Heart Failure and Pneumonia
+#Problem Statement:-
+#The function reads a csv, takes outcome and state as parameter
+#and returns the hospital in the state with lowest mortality rate for the outcome
+#For detailed problem statement refer to "2 Finding the best hospital in a state" in ProgAssignment3.pdf in the repo  
+
+# Logic Applied - 
+#1. Read the file and create list of valid states and outomes
+#2. Validate inputs against valid states and outcomes, if not valid throw back error message.
+#3. Create a subset of state, hospital and outcome to ensure smallest possible dataset is being processed
+#4. Create a further smaller subset(of one created in step 3) just to inclide rows specific to the state arguement
+#5. Remove NAs from the subset created and step 4 and pass it on to another function to find the best hospital
+#6. THe function findBestHosp(), retuns the hospital with lowest mortality rate
 best<-function(state, outcome){
   
   dataset<-read.csv("C:/DS/R/Assignment/ProgrammingAssignment3/function_best/outcome-of-care-measures.csv")
