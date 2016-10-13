@@ -11,10 +11,11 @@
 #4. Create a further smaller subset(of one created in step 3) just to inclide rows specific to the state arguement
 #5. Remove NAs from the subset created and step 4 and pass it on to another function to find the best hospital
 #6. THe function findBestHosp(), retuns the hospital with lowest mortality rate
+
+
 best<-function(state, outcome){
   
-  dataset<-read.csv("C:/DS/R/Assignment/ProgrammingAssignment3/function_best/outcome-of-care-measures.csv")
-  #hosp_outcome<-head(dataset[,c(2,7,11,17,23)],10)
+  dataset<-read.csv("outcome-of-care-measures.csv")
   hosp_outcome<-dataset[,c(2,7,11,17,23)]
   
   #changing names of columns to short and precise
@@ -53,6 +54,7 @@ best<-function(state, outcome){
     hosp_outcome_pneumonia<-pneumonia(hosp_outcome)
     bestHospital<-findBestHosp(hosp_outcome_pneumonia, state)
   }
+  bestHospital[1,][1]
 }
 
 
@@ -105,5 +107,5 @@ findBestHosp<-function(hosp_shorlisted, state){
   
   #Getting a subset on the basis of rows returned by order
   final_subset<-hosp_outcome_state[ordered_rows,]
-  final_subset[1,][1]
+  
 }
