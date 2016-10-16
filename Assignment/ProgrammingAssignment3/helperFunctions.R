@@ -1,3 +1,7 @@
+#This file includes resuable functions which are sourced by other fuctions of this assignment
+
+
+#Read the csv and, rename columns relevantely
   readAndCleanData<-function(fileName){
     
     dataset<-read.csv(fileName)
@@ -12,7 +16,10 @@
     
     data_subset
   }
+
   
+#Creates a subset with three columns, hospital name, state and the given outcome. 
+#Then removes NAs and return the subset 
   getHospOutcome<-function(dataset, outcome){
     
       if(outcome == 'pneumonia'){
@@ -35,7 +42,8 @@
         outcome_subset_noNAs<-subset(outcome_subset, !is.na(outcome_subset$heart_failure))
       }
   }
-  
+
+#Returns an ordered subset with data only for the state passed as arguement 
   findBestHosp<-function(hosp_shorlisted, state){
     
     #Creating a subset from temporary subset to have rows specific to state
@@ -47,7 +55,8 @@
     #Getting a subset on the basis of rows returned by order
     final_subset<-hosp_outcome_state[ordered_rows,]
   }
-  
+
+#Returns an hospital in specific state. as per the rank(passed as num) for given outcome  
   findhospital<-function(state, outcome, num, hosp_outcome){
     
     if(outcome=='heart attack'){
