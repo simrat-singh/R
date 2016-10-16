@@ -9,7 +9,7 @@
 #3.rbind the state name and hospital to create the final data frame
 
 
-source('function_rankhospital.R')
+source('helperFunctions.R')
 rankall<-function(outcome, num='best'){
   
   dataset<-read.csv("outcome-of-care-measures.csv")
