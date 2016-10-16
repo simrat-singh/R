@@ -12,18 +12,10 @@
 source('helperFunctions.R')
 rankall<-function(outcome, num='best'){
   
-  dataset<-read.csv("outcome-of-care-measures.csv")
-  #hosp_outcome<-head(dataset[,c(2,7,11,17,23)],10)
-  hosp_outcome<-dataset[,c(2,7,11,17,23)]
+  #Call helper function to load and create relevant subset of the data  
+  hospitals<-readAndCleanData('outcome-of-care-measures.csv')  
   
-  #changing names of columns to short and precise
-  names(hosp_outcome)[1]<-"hospital_name"
-  names(hosp_outcome)[2]<-"state"
-  names(hosp_outcome)[3]<-"heart_attack"
-  names(hosp_outcome)[4]<-"heart_failure"
-  names(hosp_outcome)[5]<-"pneumonia"
-  
-  state_list<-sort(unique(hosp_outcome[,2], incomparables = FALSE)) #Getting list of states and sort is alphabatically
+  state_list<-sort(unique(hospitals[,2], incomparables = FALSE)) #Getting list of states and sort is alphabatically
   outcome_list<-c("heart attack", "heart failure", "pneumonia") #Create a list of possible outcomes
   options(warn = -1) #Supress warnings
   result<-data.frame()
@@ -31,8 +23,23 @@ rankall<-function(outcome, num='best'){
   for (state in state_list) {
     
     #Source findhospitals() method of function_rankhospital.R
-    hospital<-findhospital(as.character(state), outcome, num, hosp_outcome)
+    hospital<-findhospital(as.character(state), outcome, num, hospitals)
     result<-rbind(result, data.frame("hospital"=hospital, "state"=as.character(state)))
   }
   result
 }
+
+#Test cases
+#head(rankall("heart attack", 20), 10)
+#Expected outcome
+#hospital                             state
+# <NA>                                AK
+#D W MCMILLAN MEMORIAL HOSPITAL       AL
+#ARKANSAS METHODIST MEDICAL CENTER    AR
+#JOHN C LINCOLN DEER VALLEY HOSPITAL  AZ
+#SHERMAN OAKS HOSPITAL                CA
+#SKY RIDGE MEDICAL CENTER             CO
+#MIDSTATE MEDICAL CENTER              CT
+# <NA>                                DC
+# <NA>                                DE
+#SOUTH FLORIDA BAPTIST HOSPITAL       FL

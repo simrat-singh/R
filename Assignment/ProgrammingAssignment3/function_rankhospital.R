@@ -37,4 +37,16 @@ rankhospital<-function(state, outcome, num='best'){
     
 }
 
+#Test cases
+#Expected outcome->FORT DUNCAN MEDICAL CENTER
 
+#rankhospital("TX", "heart failure", "best")
+#Expected outcome->
+#rankhospital("TX", "heart failure", 4)
+#Expected outcome->DETAR HOSPITAL NAVARRO
+
+#rankhospital("MD", "heart attack", "worst")
+#Expected outcome->HARFORD MEMORIAL HOSPITAL
+
+#rankhospital("MN", "heart attack", 5000)
+#Expected outcome-> NA
